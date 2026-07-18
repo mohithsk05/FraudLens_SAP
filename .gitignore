@@ -1,0 +1,13 @@
+﻿# Root ignore rules
+__pycache__/
+*.py[cod]
+*.pyo
+*.pyd
+*.pyc
+*.env
+.env
+.DS_Store
+.vscode/
+.idea/
+*.swp
+*.log

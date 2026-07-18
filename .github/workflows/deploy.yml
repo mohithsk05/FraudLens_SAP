@@ -1,0 +1,60 @@
+name: FraudLens CI/CD Pipeline
+
+on:
+  push:
+    branches: [ "main" ]
+  pull_request:
+    branches: [ "main" ]
+
+jobs:
+  test_backend:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v3
+    
+    - name: Set up Python
+      uses: actions/setup-python@v4
+      with:
+        python-version: '3.11'
+        
+    - name: Install dependencies
+      run: |
+        python -m pip install --upgrade pip
+        pip install -r backend/requirements.txt
+        
+    - name: Run ML Training & Export
+      run: |
+        python backend/train_model.py
+        python backend/train_audio.py
+        python backend/export_model.py
+        
+    - name: Start FastAPI server in background
+      run: |
+        python -m uvicorn backend.app:app --host 127.0.0.1 --port 8000 &
+        
+    - name: Wait for server boot
+      run: sleep 3
+      
+    - name: Execute automated test suite
+      run: |
+        python backend/test_endpoints.py
+
+  build_containers:
+    needs: test_backend
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v3
+    
+    - name: Copy model export to public folder for static compile
+      run: |
+        mkdir -p frontend/public
+        # Pre-seed empty mock or build output
+        echo '{"tfidf":{"vocabulary":{},"idf":[],"ngram_range":[1,1],"lowercase":true},"rf":{"n_estimators":0,"classes":[],"trees":[]}}' > frontend/public/model_export.json
+        
+    - name: Build Docker Backend Image
+      run: |
+        docker build -t fraudlens-backend:latest ./backend
+        
+    - name: Build Docker Frontend Image
+      run: |
+        docker build -t fraudlens-frontend:latest ./frontend
