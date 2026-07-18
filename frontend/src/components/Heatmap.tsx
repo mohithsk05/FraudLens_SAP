@@ -1,11 +1,11 @@
-import React, { useState, useEffect } from 'react';
+import { type FormEvent, useEffect, useState } from 'react';
 
 interface Hotspot {
   id: number;
   district: string;
   state: string;
-  lat: float;
-  lng: float;
+  lat: number;
+  lng: number;
   count: number;
   primary_scam: string;
   loss: string;
@@ -58,7 +58,7 @@ export default function Heatmap() {
     fetchHotspots();
   }, []);
 
-  const handleSubmitReport = async (e: React.FormEvent) => {
+  const handleSubmitReport = async (e: FormEvent) => {
     e.preventDefault();
     if (!formDistrict || !formState) return;
     

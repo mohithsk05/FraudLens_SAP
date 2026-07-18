@@ -149,7 +149,7 @@ export class LocalInference {
     // A. OTP
     if (/\botp\b|\bverification code\b|\bdo not share\b/.test(lowerText) && /share|send|give|tell/.test(lowerText)) {
       heuristicsScore += 45;
-      triggers.append ? triggers.push("OTP Solicitation patterns detected.") : triggers.push("OTP solicitation detected.");
+      triggers.push("OTP Solicitation patterns detected.");
     }
     // B. UPI
     if (/\bupi\b|\bcollect\b|\brefund\b|\bscratch card\b/.test(lowerText) && /claim|cashback|refund/.test(lowerText)) {

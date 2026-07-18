@@ -1,5 +1,3 @@
-import React from 'react';
-
 interface GuardianAlert {
   timestamp: string;
   sender: string;

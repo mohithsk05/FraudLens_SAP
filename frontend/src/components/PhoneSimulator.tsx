@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 import { LocalInference } from '../services/local_inference';
 
 interface Preset {
@@ -56,7 +56,7 @@ export default function PhoneSimulator({ onTriggerGuardianAlert }: PhoneSimulato
   const [verdict, setVerdict] = useState<'SAFE' | 'SUSPICIOUS' | 'CRITICAL' | null>(null);
   const [score, setScore] = useState<number>(0);
   const [category, setCategory] = useState<string>('');
-  const [explanation, setExplanation] = useState<string>('');
+  const [, setExplanation] = useState<string>('');
   const [showAlert, setShowAlert] = useState(false);
   const [alertDispatched, setAlertDispatched] = useState(false);
 

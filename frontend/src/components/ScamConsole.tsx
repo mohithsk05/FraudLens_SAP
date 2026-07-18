@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 import { LocalInference } from '../services/local_inference';
 
 interface TokenImportance {
@@ -34,7 +34,6 @@ export default function ScamConsole() {
   const [urlVal, setUrlVal] = useState('');
   const [upiVal, setUpiVal] = useState('');
   const [audioPreset, setAudioPreset] = useState<'safe_call' | 'digital_arrest' | 'custom'>('digital_arrest');
-  const [audioFile, setAudioFile] = useState<File | null>(null);
   
   // UI states
   const [loading, setLoading] = useState(false);

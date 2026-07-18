@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 import './App.css';
 import ScamConsole from './components/ScamConsole';
 import PhoneSimulator from './components/PhoneSimulator';

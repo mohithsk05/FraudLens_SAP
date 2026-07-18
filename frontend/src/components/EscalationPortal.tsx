@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 
 export default function EscalationPortal() {
   const [sender, setSender] = useState('');
@@ -6,7 +6,7 @@ export default function EscalationPortal() {
   const [loss, setLoss] = useState('₹0 (Attempted Scam Blocked)');
   const [txId, setTxId] = useState('');
   const [message, setMessage] = useState('');
-  const [dateTime, setDateTime] = useState(new Date().toLocaleString());
+  const [dateTime] = useState(new Date().toLocaleString());
 
   const getDossierHash = () => {
     // Simulated hash for evidence security
